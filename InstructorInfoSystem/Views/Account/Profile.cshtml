@@ -1,0 +1,90 @@
+﻿@{
+    ViewData["Title"] = "My Profile";
+    var firstName = ViewBag.FirstName as string;
+    var initial = !string.IsNullOrWhiteSpace(firstName)
+        ? firstName.Substring(0, 1).ToUpper()
+        : "?";
+}
+
+<div class="profile-page">
+    <div class="profile-card">
+        <div class="profile-header">
+            <span class="profile-avatar">@initial</span>
+            <div>
+                <h2>My Profile</h2>
+                <p>View your registered account information.</p>
+            </div>
+        </div>
+
+        <div class="profile-content">
+            <div class="profile-intro">
+                <h3>@ViewBag.FirstName @ViewBag.LastName</h3>
+                <p>Registered User</p>
+            </div>
+
+            <h4 class="profile-section-title">Account Information</h4>
+
+            <div class="profile-info-grid">
+                <div class="profile-info-item">
+                    <span>Account ID</span>
+                    <strong>@ViewBag.AccountId</strong>
+                </div>
+                <div class="profile-info-item">
+                    <span>First Name</span>
+                    <strong>@ViewBag.FirstName</strong>
+                </div>
+                <div class="profile-info-item">
+                    <span>Last Name</span>
+                    <strong>@ViewBag.LastName</strong>
+                </div>
+                <div class="profile-info-item">
+                    <span>Email Address</span>
+                    <strong>@ViewBag.Email</strong>
+                </div>
+                <div class="profile-info-item">
+                    <span>Age</span>
+                    <strong>@ViewBag.Age</strong>
+                </div>
+                <div class="profile-info-item">
+                    <span>Address</span>
+                    <strong>@ViewBag.Address</strong>
+                </div>
+                <div class="profile-info-item">
+                    <span>Institute</span>
+                    <strong>@ViewBag.Institute</strong>
+                </div>
+                <div class="profile-info-item">
+                    <span>Last Login</span>
+                    <strong>
+                        @(ViewBag.LastLogin == null
+                            ? "Not available yet"
+                            : ((DateTime)ViewBag.LastLogin).ToString("g"))
+                    </strong>
+                </div>
+            </div>
+
+            <div class="profile-security">
+                <strong>Account Security</strong>
+                <p>Your password is stored as a secure hash and is not displayed on this page.</p>
+            </div>
+
+            <div class="profile-actions">
+                <a asp-controller="Home" asp-action="Index" class="dashboard-button">
+                    Back to Dashboard
+                </a>
+                <a asp-controller="Instructors" asp-action="Index" class="dashboard-button">
+                    Manage Instructors
+                </a>
+                <a asp-controller="Account" asp-action="EditProfile" class="dashboard-button">
+                    Edit Profile
+                </a>
+                <a asp-controller="Account" asp-action="ChangePassword" class="dashboard-button">
+                    Change Password
+                </a>
+                <a asp-controller="Account" asp-action="DeleteAccount" class="profile-delete-button">
+                    Delete Account
+                </a>
+            </div>
+        </div>
+    </div>
+</div>

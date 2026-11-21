@@ -1,0 +1,95 @@
+﻿@model InstructorInfoSystem.Models.Instructor
+
+@{
+    ViewData["Title"] = "Delete Instructor";
+}
+
+<div class="container mt-4 instructor-form-page">
+    <div class="instructor-form-card">
+
+        <div class="instructor-form-heading">
+            <p class="instructors-eyebrow">RECORD MANAGEMENT</p>
+            <h1>Delete Instructor</h1>
+            <p>Review the record before confirming deletion.</p>
+        </div>
+
+        <div class="delete-warning">
+            <strong>Are you sure you want to delete @Model.FullName?</strong>
+            <p class="mb-0">This action cannot be undone.</p>
+        </div>
+
+        <div class="instructor-details-list mb-4">
+
+            <div class="instructor-detail">
+                <span>Full Name</span>
+                <strong>@Model.FullName</strong>
+            </div>
+
+            <div class="instructor-detail">
+                <span>Age</span>
+                <strong>@Model.Age</strong>
+            </div>
+
+            <div class="instructor-detail">
+                <span>Address</span>
+                <strong>@Model.Address</strong>
+            </div>
+
+            <div class="instructor-detail">
+                <span>Designation</span>
+                <strong>@Model.Designation</strong>
+            </div>
+
+            <div class="instructor-detail">
+                <span>Gender</span>
+                <strong>@Model.Gender</strong>
+            </div>
+
+            <div class="instructor-detail">
+                <span>Contact Number</span>
+                <strong>@Model.ContactNumber</strong>
+            </div>
+
+            <div class="instructor-detail">
+                <span>Majorship</span>
+                <strong>@Model.Majorship</strong>
+            </div>
+
+            <div class="instructor-detail">
+                <span>Bachelor Degree</span>
+                <strong>@Model.BachelorDegree</strong>
+            </div>
+
+            <div class="instructor-detail">
+                <span>E-mail Address</span>
+                <strong>@Model.Email</strong>
+            </div>
+
+        </div>
+
+        <form asp-action="Delete"
+              asp-route-id="@Model.InstructorId"
+              method="post"
+              onsubmit="return confirm('Are you sure you want to permanently delete this instructor?');">
+
+            @Html.AntiForgeryToken()
+
+            <input type="hidden" name="id" value="@Model.InstructorId" />
+
+            <div class="instructor-form-actions">
+
+                <button type="submit" class="dashboard-button delete-confirm-button">
+                    Confirm Delete
+                </button>
+
+                <a asp-controller="Instructors"
+                   asp-action="Index"
+                   class="dashboard-button dashboard-button-outline">
+                    Cancel
+                </a>
+
+            </div>
+        </form>
+
+    </div>
+</div>

@@ -1,0 +1,213 @@
+﻿
+@{
+    ViewData["Title"] = "Dashboard";
+    var totalInstructors = (int)ViewBag.TotalInstructors;
+    var firstName = User.FindFirst("FirstName")?.Value ?? "User";
+    var lastName = User.FindFirst("LastName")?.Value ?? "";
+    var email = User.Identity?.Name ?? "";
+}
+
+<div class="dashboard-modern">
+
+    <!-- Dashboard Header -->
+    <div class="dashboard-topbar">
+        <div>
+            <span class="dashboard-label">INSTRUCTOR INFORMATION SYSTEM</span>
+            <h2>Dashboard Overview</h2>
+            <p>Welcome back, @firstName! Here's your system overview.</p>
+        </div>
+
+        <div class="dashboard-date">
+            <span>ACCOUNT</span>
+            <strong>@firstName @lastName</strong>
+        </div>
+    </div>
+
+    <!-- Summary Cards -->
+    <div class="dashboard-stats">
+
+        <div class="modern-stat-card">
+            <div class="stat-icon stat-blue">
+                <i class="bi bi-people"></i>
+            </div>
+            <div>
+                <span>Total Instructors</span>
+                <h3>@totalInstructors</h3>
+                <small>Saved instructor records</small>
+            </div>
+        </div>
+
+        <div class="modern-stat-card">
+            <div class="stat-icon stat-green">
+                <i class="bi bi-person-plus"></i>
+            </div>
+            <div>
+                <span>Add Instructor</span>
+                <h3>New Record</h3>
+                <small>Register instructor information</small>
+            </div>
+            <a asp-controller="Instructors"
+               asp-action="Create"
+               class="stat-card-link"
+               aria-label="Add instructor"></a>
+        </div>
+
+        <div class="modern-stat-card">
+            <div class="stat-icon stat-purple">
+                <i class="bi bi-clipboard-data"></i>
+            </div>
+            <div>
+                <span>Record Management</span>
+                <h3>Manage</h3>
+                <small>View and update records</small>
+            </div>
+            <a asp-controller="Instructors"
+               asp-action="Index"
+               class="stat-card-link"
+               aria-label="Manage instructors"></a>
+        </div>
+
+    </div>
+
+    <!-- Main Dashboard Panels -->
+    <div class="dashboard-content-grid">
+
+        <!-- Instructor Management -->
+        <div class="modern-panel instructor-panel">
+            <div class="panel-heading">
+                <div>
+                    <h4>Instructor Management</h4>
+                    <p>Manage your instructor information.</p>
+                </div>
+                <span class="panel-heading-icon">
+                    <i class="bi bi-person-vcard"></i>
+                </span>
+            </div>
+
+            <div class="management-content">
+                <div class="management-icon">
+                    <i class="bi bi-people-fill"></i>
+                </div>
+
+                <h3>@totalInstructors</h3>
+                <p>Total instructor records in your database.</p>
+
+                <div class="management-actions">
+                    <a asp-controller="Instructors"
+                       asp-action="Index"
+                       class="modern-primary-button">
+                        <i class="bi bi-list-ul"></i>
+                        View Instructors
+                    </a>
+
+                    <a asp-controller="Instructors"
+                       asp-action="Create"
+                       class="modern-secondary-button">
+                        <i class="bi bi-plus-lg"></i>
+                        Add Instructor
+                    </a>
+                </div>
+            </div>
+        </div>
+
+        <!-- Account Information -->
+        <div class="modern-panel account-panel">
+            <div class="panel-heading">
+                <div>
+                    <h4>Account Information</h4>
+                    <p>Your registered account details.</p>
+                </div>
+                <span class="panel-heading-icon">
+                    <i class="bi bi-person-circle"></i>
+                </span>
+            </div>
+
+            <div class="account-information">
+
+                <div class="account-avatar">
+                    @firstName.Substring(0, 1).ToUpper()
+                </div>
+
+                <h5>@firstName @lastName</h5>
+                <span class="account-role">System User</span>
+
+                <div class="account-info-row">
+                    <span>Full Name</span>
+                    <strong>@firstName @lastName</strong>
+                </div>
+
+                <div class="account-info-row">
+                    <span>Email Address</span>
+                    <strong>@email</strong>
+                </div>
+
+                <a asp-controller="Account"
+                   asp-action="Profile"
+                   class="modern-outline-button">
+                    <i class="bi bi-person-gear"></i>
+                    View My Profile
+                </a>
+
+            </div>
+        </div>
+
+    </div>
+
+    <!-- Quick Actions -->
+    <div class="modern-panel quick-actions-panel">
+        <div class="panel-heading">
+            <div>
+                <h4>Quick Actions</h4>
+                <p>Quick access to the main features of your system.</p>
+            </div>
+            <span class="panel-heading-icon">
+                <i class="bi bi-lightning-charge"></i>
+            </span>
+        </div>
+
+        <div class="quick-action-list">
+
+            <a asp-controller="Instructors"
+               asp-action="Index"
+               class="quick-action-item">
+                <span class="quick-action-icon">
+                    <i class="bi bi-people"></i>
+                </span>
+                <span>
+                    <strong>View Instructor Records</strong>
+                    <small>Browse all saved instructor information</small>
+                </span>
+                <i class="bi bi-chevron-right"></i>
+            </a>
+
+            <a asp-controller="Instructors"
+               asp-action="Create"
+               class="quick-action-item">
+                <span class="quick-action-icon">
+                    <i class="bi bi-person-plus"></i>
+                </span>
+                <span>
+                    <strong>Add New Instructor</strong>
+                    <small>Register a new instructor in the system</small>
+                </span>
+                <i class="bi bi-chevron-right"></i>
+            </a>
+
+            <a asp-controller="Account"
+               asp-action="Profile"
+               class="quick-action-item">
+                <span class="quick-action-icon">
+                    <i class="bi bi-person-circle"></i>
+                </span>
+                <span>
+                    <strong>My Account</strong>
+                    <small>View and manage your account information</small>
+                </span>
+                <i class="bi bi-chevron-right"></i>
+            </a>
+
+        </div>
+    </div>
+
+</div>
+```

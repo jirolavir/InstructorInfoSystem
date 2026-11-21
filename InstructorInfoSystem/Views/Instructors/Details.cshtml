@@ -1,0 +1,81 @@
+﻿@model InstructorInfoSystem.Models.Instructor
+
+@{
+    ViewData["Title"] = "Instructor Details";
+}
+
+<div class="container mt-4 instructor-form-page">
+    <div class="instructor-form-card">
+
+        <div class="instructor-form-heading">
+            <p class="instructors-eyebrow">RECORD MANAGEMENT</p>
+            <h1>Instructor Details</h1>
+            <p>View the instructor’s saved information.</p>
+        </div>
+
+        <div class="instructor-details-list">
+
+            <div class="instructor-detail">
+                <span>Full Name</span>
+                <strong>@Model.FullName</strong>
+            </div>
+
+            <div class="instructor-detail">
+                <span>Age</span>
+                <strong>@Model.Age</strong>
+            </div>
+
+            <div class="instructor-detail">
+                <span>Address</span>
+                <strong>@Model.Address</strong>
+            </div>
+
+            <div class="instructor-detail">
+                <span>Designation</span>
+                <strong>@Model.Designation</strong>
+            </div>
+
+            <div class="instructor-detail">
+                <span>Gender</span>
+                <strong>@Model.Gender</strong>
+            </div>
+
+            <div class="instructor-detail">
+                <span>Contact Number</span>
+                <strong>@Model.ContactNumber</strong>
+            </div>
+
+            <div class="instructor-detail">
+                <span>Majorship</span>
+                <strong>@Model.Majorship</strong>
+            </div>
+
+            <div class="instructor-detail">
+                <span>Bachelor Degree</span>
+                <strong>@Model.BachelorDegree</strong>
+            </div>
+
+            <div class="instructor-detail">
+                <span>E-mail Address</span>
+                <strong>@Model.Email</strong>
+            </div>
+
+        </div>
+
+        <div class="instructor-form-actions">
+
+            <a asp-action="Edit"
+               asp-route-id="@Model.InstructorId"
+               class="dashboard-button dashboard-button-primary">
+                Edit Instructor
+            </a>
+
+            <a asp-action="Index"
+               class="dashboard-button dashboard-button-outline">
+                Back to List
+            </a>
+
+        </div>
+
+    </div>
+</div>

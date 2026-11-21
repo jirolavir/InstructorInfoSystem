@@ -1,0 +1,124 @@
+﻿@model InstructorInfoSystem.Models.Instructor
+
+@{
+    ViewData["Title"] = "Add Instructor";
+}
+
+<div class="container mt-4 instructor-form-page">
+    <div class="instructor-form-card">
+
+        <div class="instructor-form-heading">
+            <p class="instructors-eyebrow">RECORD MANAGEMENT</p>
+            <h1>Add New Instructor</h1>
+            <p>Enter the instructor’s information below.</p>
+        </div>
+
+        <form asp-action="Create" method="post">
+
+            <div asp-validation-summary="All"
+                 class="alert alert-danger mb-3"
+                 role="alert"></div>
+
+            <div class="row g-3">
+
+                <div class="col-12">
+                    <label asp-for="FullName" class="form-label"></label>
+                    <input asp-for="FullName"
+                           class="form-control"
+                           placeholder="Enter full name" />
+                    <span asp-validation-for="FullName" class="text-danger"></span>
+                </div>
+
+                <div class="col-12 col-md-6">
+                    <label asp-for="Age" class="form-label"></label>
+                    <input asp-for="Age"
+                           type="number"
+                           class="form-control"
+                           placeholder="Enter age" />
+                    <span asp-validation-for="Age" class="text-danger"></span>
+                </div>
+
+                <div class="col-12 col-md-6">
+                    <label asp-for="Gender" class="form-label"></label>
+                    <select asp-for="Gender" class="form-select">
+                        <option value="">Select gender</option>
+                        <option value="Male">Male</option>
+                        <option value="Female">Female</option>
+                        <option value="Prefer not to say">Prefer not to say</option>
+                    </select>
+                    <span asp-validation-for="Gender" class="text-danger"></span>
+                </div>
+
+                <div class="col-12">
+                    <label asp-for="Address" class="form-label"></label>
+                    <textarea asp-for="Address"
+                              class="form-control"
+                              rows="2"
+                              placeholder="Enter complete address"></textarea>
+                    <span asp-validation-for="Address" class="text-danger"></span>
+                </div>
+
+                <div class="col-12 col-md-6">
+                    <label asp-for="Designation" class="form-label"></label>
+                    <input asp-for="Designation"
+                           class="form-control"
+                           placeholder="Enter designation" />
+                    <span asp-validation-for="Designation" class="text-danger"></span>
+                </div>
+
+                <div class="col-12 col-md-6">
+                    <label asp-for="ContactNumber" class="form-label"></label>
+                    <input asp-for="ContactNumber"
+                           type="tel"
+                           class="form-control"
+                           placeholder="Enter contact number" />
+                    <span asp-validation-for="ContactNumber" class="text-danger"></span>
+                </div>
+
+                <div class="col-12 col-md-6">
+                    <label asp-for="Majorship" class="form-label"></label>
+                    <input asp-for="Majorship"
+                           class="form-control"
+                           placeholder="Enter majorship" />
+                    <span asp-validation-for="Majorship" class="text-danger"></span>
+                </div>
+
+                <div class="col-12 col-md-6">
+                    <label asp-for="BachelorDegree" class="form-label"></label>
+                    <input asp-for="BachelorDegree"
+                           class="form-control"
+                           placeholder="Enter bachelor degree" />
+                    <span asp-validation-for="BachelorDegree" class="text-danger"></span>
+                </div>
+
+                <div class="col-12">
+                    <label asp-for="Email" class="form-label"></label>
+                    <input asp-for="Email"
+                           type="email"
+                           class="form-control"
+                           autocomplete="email"
+                           placeholder="name@example.com" />
+                    <span asp-validation-for="Email" class="text-danger"></span>
+                </div>
+
+            </div>
+
+            <div class="instructor-form-actions">
+                <button type="submit"
+                        class="dashboard-button dashboard-button-primary">
+                    Save Instructor
+                </button>
+
+                <a asp-action="Index"
+                   class="dashboard-button dashboard-button-outline">
+                    Cancel
+                </a>
+            </div>
+
+        </form>
+    </div>
+</div>
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}

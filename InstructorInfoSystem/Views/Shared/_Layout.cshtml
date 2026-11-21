@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>@ViewData["Title"] - Instructor Information System</title>
+
+    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+    <!-- Bootstrap Icons: this was missing, which is why the icon boxes were empty -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css" />
+    <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
+    <link rel="stylesheet" href="~/InstructorInfoSystem.styles.css" asp-append-version="true" />
+
+    <!-- Restore sidebar state before first paint (no flicker) -->
+    <script>
+        (function () {
+            try {
+                var collapsed;
+                if (window.innerWidth <= 768) { collapsed = true; }
+                else { collapsed = localStorage.getItem('sidebarCollapsed') === '1'; }
+                if (collapsed) document.documentElement.classList.add('sidebar-collapsed');
+            } catch (e) { }
+        })();
+    </script>
+</head>
+<body>
+
+    <!-- Animated topographic background -->
+    <canvas id="topo-background"></canvas>
+
+    @{
+        var isLoggedIn = User.Identity?.IsAuthenticated == true;
+    }
+
+    <div class="app-shell">
+
+        @if (isLoggedIn)
+        {
+            <!-- SIDEBAR (only for signed-in users) -->
+            <aside class="app-sidebar" id="appSidebar">
+
+                <div class="app-sidebar-header">
+                    <h4>Instructor System</h4>
+                    <p>Information Management</p>
+                </div>
+
+                <nav class="app-sidebar-nav">
+                    <a asp-controller="Home" asp-action="Index" class="app-sidebar-link">
+                        <i class="bi bi-house-door"></i>
+                        Dashboard
+                    </a>
+
+                    <a asp-controller="Instructors" asp-action="Index" class="app-sidebar-link">
+                        <i class="bi bi-people"></i>
+                        Instructors
+                    </a>
+
+                    <a asp-controller="Account" asp-action="Profile" class="app-sidebar-link">
+                        <i class="bi bi-person-circle"></i>
+                        My Profile
+                    </a>
+                </nav>
+
+                <div class="app-sidebar-footer">
+                    <form asp-controller="Account" asp-action="Logout" method="post">
+                        <button type="submit"
+                                class="app-sidebar-link w-100 border-0 text-start"
+                                style="background: transparent;">
+                            <i class="bi bi-box-arrow-right"></i>
+                            Logout
+                        </button>
+                    </form>
+                </div>
+
+            </aside>
+
+            <div class="sidebar-backdrop" id="sidebarBackdrop"></div>
+        }
+
+        <!-- MAIN CONTENT -->
+        <div class="app-main-area">
+
+            <header class="app-topbar">
+                <div class="app-topbar-left">
+                    @if (isLoggedIn)
+                    {
+                        <button type="button"
+                                id="sidebarToggle"
+                                class="sidebar-toggle"
+                                title="Show or hide menu"
+                                aria-label="Show or hide menu"
+                                aria-controls="appSidebar"
+                                aria-expanded="true">
+                            <i class="bi bi-list"></i>
+                        </button>
+                    }
+                    else
+                    {
+                        <span class="app-topbar-brand">Instructor System</span>
+                    }
+
+                    <h5 class="app-topbar-title">@ViewData["Title"]</h5>
+                </div>
+
+                @if (isLoggedIn)
+                {
+                    <span class="app-topbar-user">
+                        Welcome, @User.FindFirst("FirstName")?.Value
+                    </span>
+                }
+                else
+                {
+                    <nav class="app-topbar-auth">
+                        <a asp-controller="Account" asp-action="Login" class="topbar-auth-link">
+                            <i class="bi bi-box-arrow-in-right"></i>
+                            Login
+                        </a>
+                        <a asp-controller="Account" asp-action="Register" class="topbar-auth-link topbar-auth-primary">
+                            <i class="bi bi-person-plus"></i>
+                            Register
+                        </a>
+                    </nav>
+                }
+            </header>
+
+            <main class="main-content">
+                @RenderBody()
+            </main>
+
+            <footer class="site-footer">
+                <p class="mb-0">
+                    &copy; @DateTime.Now.Year - Instructor Information System
+                </p>
+            </footer>
+
+        </div>
+    </div>
+
+    <script src="~/lib/jquery/dist/jquery.min.js"></script>
+    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="~/js/site.js" asp-append-version="true"></script>
+    <script src="~/js/topo-background.js" asp-append-version="true"></script>
+
+    <script>
+        // Sidebar open / close
+        (function () {
+            var btn = document.getElementById('sidebarToggle');
+            if (!btn) return;
+            var root = document.documentElement;
+            var backdrop = document.getElementById('sidebarBackdrop');
+
+            function isMobile() { return window.matchMedia('(max-width: 768px)').matches; }
+            function sync() {
+                btn.setAttribute('aria-expanded', root.classList.contains('sidebar-collapsed') ? 'false' : 'true');
+            }
+            function setCollapsed(c) {
+                root.classList.toggle('sidebar-collapsed', c);
+                if (!isMobile()) {
+                    try { localStorage.setItem('sidebarCollapsed', c ? '1' : '0'); } catch (e) { }
+                }
+                sync();
+            }
+
+            btn.addEventListener('click', function () {
+                setCollapsed(!root.classList.contains('sidebar-collapsed'));
+            });
+            if (backdrop) backdrop.addEventListener('click', function () { setCollapsed(true); });
+            document.addEventListener('keydown', function (e) {
+                if (e.key === 'Escape' && isMobile()) setCollapsed(true);
+            });
+            sync();
+        })();
+    </script>
+
+    @await RenderSectionAsync("Scripts", required: false)
+
+</body>
+</html>

@@ -1,0 +1,193 @@
+﻿@model IEnumerable<InstructorInfoSystem.Models.Instructor>
+
+@{
+    ViewData["Title"] = "Instructors";
+
+    var currentSort = ViewData["CurrentSort"]?.ToString();
+    var currentFilter = ViewData["CurrentFilter"]?.ToString();
+
+    string NextSort(string column)
+    {
+        return currentSort == column
+            ? column + "_desc"
+            : column;
+    }
+
+    var currentPage = (int)(ViewData["CurrentPage"] ?? 1);
+    var totalPages = (int)(ViewData["TotalPages"] ?? 0);
+}
+
+<div class="container-fluid px-4 px-md-5 mt-4 instructors-page">
+
+    <div class="instructors-heading">
+        <div>
+            <p class="instructors-eyebrow">RECORD MANAGEMENT</p>
+            <h1>Instructors</h1>
+            <p class="instructors-subtitle">
+                Search, sort, and manage instructor information.
+            </p>
+        </div>
+
+        <a asp-action="Create" class="dashboard-button dashboard-button-primary">
+            + Add Instructor
+        </a>
+    </div>
+
+    @if (TempData["Message"] != null)
+    {
+        <div class="alert alert-success alert-dismissible fade show instructors-alert"
+             role="alert">
+            @TempData["Message"]
+            <button type="button"
+                    class="btn-close"
+                    data-bs-dismiss="alert"
+                    aria-label="Close"></button>
+        </div>
+    }
+
+    <div class="instructors-toolbar">
+        <form asp-action="Index" method="get" class="instructors-search">
+            <input type="text"
+                   name="searchString"
+                   value="@currentFilter"
+                   class="form-control"
+                   placeholder="Search by name, designation, email, or other details..." />
+
+            <button type="submit" class="dashboard-button dashboard-button-primary">
+                Search
+            </button>
+
+            <a asp-action="Index" class="dashboard-button dashboard-button-outline">
+                Clear
+            </a>
+        </form>
+
+        <p class="instructors-count">
+            Showing <strong>@Model.Count()</strong> of
+            <strong>@ViewData["TotalCount"]</strong> matching instructors
+        </p>
+    </div>
+
+    <div class="instructors-table-wrap">
+        <div class="table-responsive">
+            <table class="table instructors-table align-middle mb-0">
+                <thead>
+                    <tr>
+                        <th>Full Name</th>
+                        <th>Age</th>
+                        <th>Designation</th>
+                        <th>Gender</th>
+                        <th>Contact Number</th>
+                        <th>Majorship</th>
+                        <th>Bachelor Degree</th>
+                        <th>
+                            <a asp-action="Index"
+                               asp-route-searchString="@currentFilter"
+                               asp-route-sortOrder="@NextSort("email")">
+                                E-mail Address
+                                @if (currentSort == "email")
+                                {
+                                    <span>↑</span>
+                                }
+                                else if (currentSort == "email_desc")
+                                {
+                                    <span>↓</span>
+                                }
+                            </a>
+                        </th>
+                        <th class="text-center">Actions</th>
+                    </tr>
+                </thead>
+
+                <tbody>
+                    @if (Model.Any())
+                    {
+                        @foreach (var instructor in Model)
+                        {
+                            <tr>
+                                <td>@instructor.FullName</td>
+                                <td>@instructor.Age</td>
+                                <td>@instructor.Designation</td>
+                                <td>@instructor.Gender</td>
+                                <td>@instructor.ContactNumber</td>
+                                <td>@instructor.Majorship</td>
+                                <td>@instructor.BachelorDegree</td>
+                                <td class="instructor-email">@instructor.Email</td>
+                                <td class="text-center text-nowrap">
+                                    <a asp-action="Details"
+                                       asp-route-id="@instructor.InstructorId"
+                                       class="instructor-action action-details">
+                                        Details
+                                    </a>
+
+                                    <a asp-action="Edit"
+                                       asp-route-id="@instructor.InstructorId"
+                                       class="instructor-action action-edit">
+                                        Edit
+                                    </a>
+
+                                    <a asp-action="Delete"
+                                       asp-route-id="@instructor.InstructorId"
+                                       class="instructor-action action-delete">
+                                        Delete
+                                    </a>
+                                </td>
+                            </tr>
+                        }
+                    }
+                    else
+                    {
+                        <tr>
+                            <td colspan="9" class="instructors-empty">
+                                No instructors found. Add an instructor to get started.
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+    @if (totalPages > 1)
+    {
+        <nav aria-label="Instructor pages" class="mt-4">
+            <ul class="pagination justify-content-center">
+
+                <li class="page-item @(currentPage <= 1 ? "disabled" : "")">
+                    <a class="page-link"
+                       asp-action="Index"
+                       asp-route-searchString="@currentFilter"
+                       asp-route-sortOrder="@currentSort"
+                       asp-route-page="@(currentPage - 1)">
+                        Previous
+                    </a>
+                </li>
+
+                @for (var p = 1; p <= totalPages; p++)
+                {
+                    <li class="page-item @(p == currentPage ? "active" : "")">
+                        <a class="page-link"
+                           asp-action="Index"
+                           asp-route-searchString="@currentFilter"
+                           asp-route-sortOrder="@currentSort"
+                           asp-route-page="@p">
+                            @p
+                        </a>
+                    </li>
+                }
+
+                <li class="page-item @(currentPage >= totalPages ? "disabled" : "")">
+                    <a class="page-link"
+                       asp-action="Index"
+                       asp-route-searchString="@currentFilter"
+                       asp-route-sortOrder="@currentSort"
+                       asp-route-page="@(currentPage + 1)">
+                        Next
+                    </a>
+                </li>
+
+            </ul>
+        </nav>
+    }
+
+</div>

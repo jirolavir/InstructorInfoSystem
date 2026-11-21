@@ -1,0 +1,49 @@
+@model InstructorInfoSystem.Models.LoginViewModel
+
+@{
+    ViewData["Title"] = "Login";
+}
+
+<div class="login-page">
+    <div class="login-card">
+        <div class="login-heading">
+            <div class="login-mark">IS</div>
+            <h1>Welcome back</h1>
+            <p>Sign in to your Instructor Information System account.</p>
+        </div>
+
+        @if (TempData["Message"] != null)
+        {
+            <div class="alert alert-success login-alert">
+                @TempData["Message"]
+            </div>
+        }
+
+        <form asp-action="Login" method="post">
+            <div asp-validation-summary="ModelOnly" class="text-danger mb-3"></div>
+
+            <div class="form-group mb-3">
+                <label asp-for="EmailOrId" class="form-label">Email or Instructor ID</label>
+                <input asp-for="EmailOrId" class="form-control" autocomplete="username" placeholder="Enter your email or ID" />
+                <span asp-validation-for="EmailOrId" class="text-danger"></span>
+            </div>
+
+            <div class="form-group mb-4">
+                <label asp-for="Password" class="form-label"></label>
+                <input asp-for="Password" class="form-control" autocomplete="current-password" placeholder="Enter your password" />
+                <span asp-validation-for="Password" class="text-danger"></span>
+            </div>
+
+            <button type="submit" class="btn login-submit">Login</button>
+        </form>
+
+        <p class="login-register">
+            Don’t have an account?
+            <a asp-action="Register">Create one</a>
+        </p>
+    </div>
+</div>
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}
