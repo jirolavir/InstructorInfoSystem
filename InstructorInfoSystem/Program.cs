@@ -27,6 +27,18 @@ builder.Services
 
 var app = builder.Build();
 
+
+// Apply any pending EF Core migrations before handling requests.
+// This creates UserAccounts and keeps the SQLite schema current.
+using (var scope = app.Services.CreateScope())
+{
+    var dbContext = scope.ServiceProvider
+        .GetRequiredService<ApplicationDbContext>();
+
+    dbContext.Database.Migrate();
+}
+
+
 // Configure the HTTP request pipeline.
 if (!app.Environment.IsDevelopment())
 {
