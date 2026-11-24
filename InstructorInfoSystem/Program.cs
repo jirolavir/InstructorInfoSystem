@@ -27,7 +27,10 @@ builder.Services
 
 var app = builder.Build();
 
+<<<<<<< HEAD
 
+=======
+>>>>>>> 9069d95 (Update Instructor Information System)
 // Apply any pending EF Core migrations before handling requests.
 // This creates UserAccounts and keeps the SQLite schema current.
 using (var scope = app.Services.CreateScope())
@@ -38,7 +41,10 @@ using (var scope = app.Services.CreateScope())
     dbContext.Database.Migrate();
 }
 
+<<<<<<< HEAD
 
+=======
+>>>>>>> 9069d95 (Update Instructor Information System)
 // Configure the HTTP request pipeline.
 if (!app.Environment.IsDevelopment())
 {

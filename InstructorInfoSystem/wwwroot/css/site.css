@@ -2718,3 +2718,465 @@ html.sidebar-collapsed .app-sidebar {
         transition: none;
     }
 }
+
+
+/* =====================================================
+   LIGHT MODE + DARK MODE
+   ===================================================== */
+
+:root {
+    color-scheme: light;
+    --page-bg: #f1f5f9;
+    --surface: #ffffff;
+    --surface-secondary: #f8fafc;
+    --text-primary: #172b4d;
+    --text-secondary: #64748b;
+    --border-color: #e2e8f0;
+    --input-bg: #ffffff;
+    --table-hover: #f1f5f9;
+    --accent: #2563eb;
+    --accent-hover: #1d4ed8;
+}
+
+html[data-theme="dark"] {
+    color-scheme: dark;
+    --page-bg: #0f172a;
+    --surface: #1e293b;
+    --surface-secondary: #273449;
+    --text-primary: #f1f5f9;
+    --text-secondary: #cbd5e1;
+    --border-color: #334155;
+    --input-bg: #273449;
+    --table-hover: #334155;
+    --accent: #60a5fa;
+    --accent-hover: #93c5fd;
+}
+
+/* Main page background */
+
+html[data-theme="light"] body {
+    background: var(--page-bg) !important;
+}
+
+html[data-theme="dark"] body {
+    background: var(--page-bg) !important;
+}
+
+    html[data-theme="dark"] body::before {
+        background: linear-gradient( -45deg, #0f172a, #172554, #1e1b4b, #111827 ) !important;
+    }
+
+/* Main application */
+
+html[data-theme="dark"] .app-main-area,
+html[data-theme="dark"] .app-main-area .main-content {
+    background: transparent !important;
+    color: var(--text-primary);
+}
+
+html[data-theme="dark"] .app-topbar {
+    background: rgba(30, 41, 59, 0.92) !important;
+    border-color: var(--border-color);
+}
+
+html[data-theme="dark"] .app-topbar-title,
+html[data-theme="dark"] .app-topbar-user,
+html[data-theme="dark"] .app-topbar-brand {
+    color: var(--text-primary) !important;
+}
+
+html[data-theme="dark"] .site-footer {
+    color: #94a3b8 !important;
+}
+
+/* Sidebar */
+
+.app-sidebar {
+    transition: background-color 0.35s ease, color 0.35s ease, margin-left 0.3s ease, transform 0.3s ease;
+}
+
+html[data-theme="dark"] .app-sidebar {
+    background: #080f1e !important;
+    border-color: #25334a;
+}
+
+html[data-theme="dark"] .app-sidebar-header {
+    border-color: #273449;
+}
+
+    html[data-theme="dark"] .app-sidebar-header p {
+        color: #a8b6cc;
+    }
+
+html[data-theme="dark"] .app-sidebar-link {
+    color: #cbd5e1;
+}
+
+    html[data-theme="dark"] .app-sidebar-link:hover,
+    html[data-theme="dark"] .app-sidebar-link.active {
+        background: #1d4ed8;
+        color: #ffffff;
+    }
+
+/* Dashboard cards and panels */
+
+html[data-theme="dark"] .dashboard-card,
+html[data-theme="dark"] .dashboard-section,
+html[data-theme="dark"] .modern-stat-card,
+html[data-theme="dark"] .modern-panel,
+html[data-theme="dark"] .dashboard-date,
+html[data-theme="dark"] .instructors-toolbar,
+html[data-theme="dark"] .instructors-table-wrap,
+html[data-theme="dark"] .instructor-form-card,
+html[data-theme="dark"] .login-card,
+html[data-theme="dark"] .profile-card {
+    background: var(--surface) !important;
+    border-color: var(--border-color) !important;
+    color: var(--text-primary) !important;
+}
+
+    /* Text visibility */
+
+    html[data-theme="dark"] .dashboard-topbar h2,
+    html[data-theme="dark"] .dashboard-card h5,
+    html[data-theme="dark"] .dashboard-section h4,
+    html[data-theme="dark"] .modern-stat-card h3,
+    html[data-theme="dark"] .modern-stat-card span,
+    html[data-theme="dark"] .panel-heading h4,
+    html[data-theme="dark"] .management-content h3,
+    html[data-theme="dark"] .account-information h5,
+    html[data-theme="dark"] .account-info-row strong,
+    html[data-theme="dark"] .quick-action-item strong,
+    html[data-theme="dark"] .instructors-heading h1,
+    html[data-theme="dark"] .instructor-form-heading h1,
+    html[data-theme="dark"] .login-heading h1,
+    html[data-theme="dark"] .profile-intro h3,
+    html[data-theme="dark"] .profile-section-title,
+    html[data-theme="dark"] .profile-info-item strong,
+    html[data-theme="dark"] .instructor-detail strong {
+        color: var(--text-primary) !important;
+    }
+
+    html[data-theme="dark"] .dashboard-card p,
+    html[data-theme="dark"] .dashboard-section p,
+    html[data-theme="dark"] .dashboard-topbar p,
+    html[data-theme="dark"] .dashboard-date strong,
+    html[data-theme="dark"] .instructors-subtitle,
+    html[data-theme="dark"] .instructors-count,
+    html[data-theme="dark"] .instructor-form-heading p,
+    html[data-theme="dark"] .login-heading p,
+    html[data-theme="dark"] .profile-intro p,
+    html[data-theme="dark"] .instructor-detail span,
+    html[data-theme="dark"] .account-info-row span,
+    html[data-theme="dark"] .quick-action-item small {
+        color: var(--text-secondary) !important;
+    }
+
+/* Instructor table */
+
+html[data-theme="dark"] .instructors-table {
+    color: var(--text-primary);
+    --bs-table-bg: var(--surface);
+    --bs-table-color: var(--text-primary);
+    --bs-table-border-color: var(--border-color);
+    --bs-table-hover-bg: var(--table-hover);
+    --bs-table-hover-color: var(--text-primary);
+}
+
+    html[data-theme="dark"] .instructors-table thead th {
+        background: #273449 !important;
+        color: #e2e8f0 !important;
+        border-color: var(--border-color) !important;
+    }
+
+    html[data-theme="dark"] .instructors-table tbody td {
+        background: var(--surface);
+        color: var(--text-primary) !important;
+        border-color: var(--border-color) !important;
+    }
+
+    html[data-theme="dark"] .instructors-table tbody tr:hover td {
+        background: var(--table-hover) !important;
+    }
+
+    html[data-theme="dark"] .instructors-table thead a {
+        color: #e2e8f0 !important;
+    }
+
+/* Forms and inputs */
+
+html[data-theme="dark"] .form-control,
+html[data-theme="dark"] .form-select,
+html[data-theme="dark"] .instructor-form-card .form-control,
+html[data-theme="dark"] .login-card .form-control,
+html[data-theme="dark"] .profile-content .form-control {
+    background-color: var(--input-bg) !important;
+    border-color: var(--border-color) !important;
+    color: var(--text-primary) !important;
+}
+
+    html[data-theme="dark"] .form-control::placeholder {
+        color: #94a3b8 !important;
+    }
+
+html[data-theme="dark"] .form-label,
+html[data-theme="dark"] .instructor-form-card .form-label {
+    color: var(--text-primary) !important;
+}
+
+html[data-theme="dark"] .form-control:focus,
+html[data-theme="dark"] .form-select:focus {
+    border-color: #60a5fa !important;
+    box-shadow: 0 0 0 3px rgba(96, 165, 250, 0.18) !important;
+}
+
+/* Profile and instructor details */
+
+html[data-theme="dark"] .profile-info-item,
+html[data-theme="dark"] .instructor-detail,
+html[data-theme="dark"] .account-detail {
+    background: var(--surface-secondary) !important;
+    border-color: var(--border-color) !important;
+}
+
+    html[data-theme="dark"] .profile-info-item span,
+    html[data-theme="dark"] .account-detail span {
+        color: var(--text-secondary) !important;
+    }
+
+html[data-theme="dark"] .profile-security {
+    background: #172b4d !important;
+    border-color: #31558b !important;
+    color: #bfdbfe !important;
+}
+
+/* Login and registration */
+
+html[data-theme="dark"] .login-heading h1 {
+    color: var(--text-primary) !important;
+}
+
+html[data-theme="dark"] .login-register {
+    color: var(--text-secondary) !important;
+}
+
+/* Theme toggle button */
+
+.app-topbar-right {
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    gap: 16px;
+}
+
+.theme-toggle {
+    position: relative;
+    display: grid;
+    place-items: center;
+    width: 46px;
+    height: 46px;
+    flex-shrink: 0;
+    overflow: hidden;
+    border: 1px solid #dbe3f0;
+    border-radius: 50%;
+    background: #fef3c7;
+    color: #d97706;
+    font-size: 21px;
+    cursor: pointer;
+    transition: background 0.4s ease, color 0.4s ease, border-color 0.4s ease, transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+    .theme-toggle:hover {
+        transform: rotate(-12deg) scale(1.08);
+        box-shadow: 0 5px 16px rgba(37, 99, 235, 0.16);
+    }
+
+    .theme-toggle:active {
+        transform: scale(0.9);
+    }
+
+.theme-icon {
+    display: grid;
+    place-items: center;
+    animation: themeIconEnter 0.55s cubic-bezier(.2,.8,.2,1);
+}
+
+    .theme-icon i {
+        display: block;
+    }
+
+html[data-theme="dark"] .theme-toggle {
+    background: #273449;
+    color: #facc15;
+    border-color: #475569;
+}
+
+@keyframes themeIconEnter {
+    0% {
+        opacity: 0;
+        transform: translateY(18px) rotate(-100deg) scale(0.5);
+    }
+
+    65% {
+        opacity: 1;
+        transform: translateY(-3px) rotate(12deg) scale(1.15);
+    }
+
+    100% {
+        opacity: 1;
+        transform: translateY(0) rotate(0) scale(1);
+    }
+}
+
+/* Smooth color transitions */
+
+body.theme-transition,
+body.theme-transition .app-sidebar,
+body.theme-transition .app-topbar,
+body.theme-transition .main-content,
+body.theme-transition .dashboard-card,
+body.theme-transition .dashboard-section,
+body.theme-transition .modern-panel,
+body.theme-transition .modern-stat-card,
+body.theme-transition .instructors-table-wrap,
+body.theme-transition .instructor-form-card,
+body.theme-transition .login-card,
+body.theme-transition .profile-card {
+    transition: background-color 0.45s ease, color 0.45s ease, border-color 0.45s ease, box-shadow 0.45s ease !important;
+}
+
+/* =====================================================
+   ANIMATED NAVIGATION
+   ===================================================== */
+
+.app-sidebar-link {
+    position: relative;
+    overflow: hidden;
+    transition: background 0.3s ease, color 0.3s ease, transform 0.3s ease, padding-left 0.3s ease;
+}
+
+    .app-sidebar-link::before {
+        content: "";
+        position: absolute;
+        left: 0;
+        top: 50%;
+        width: 3px;
+        height: 0;
+        border-radius: 0 5px 5px 0;
+        background: #ffffff;
+        transform: translateY(-50%);
+        transition: height 0.3s ease;
+    }
+
+    .app-sidebar-link:hover {
+        padding-left: 20px;
+        transform: translateX(3px);
+    }
+
+        .app-sidebar-link:hover::before,
+        .app-sidebar-link.active::before {
+            height: 65%;
+        }
+
+    .app-sidebar-link i {
+        transition: transform 0.3s ease;
+    }
+
+    .app-sidebar-link:hover i {
+        transform: scale(1.15) rotate(-5deg);
+    }
+
+/* Navigation entrance */
+
+.app-sidebar-nav .app-sidebar-link {
+    animation: navItemEnter 0.5s ease both;
+}
+
+    .app-sidebar-nav .app-sidebar-link:nth-child(1) {
+        animation-delay: 0.05s;
+    }
+
+    .app-sidebar-nav .app-sidebar-link:nth-child(2) {
+        animation-delay: 0.12s;
+    }
+
+    .app-sidebar-nav .app-sidebar-link:nth-child(3) {
+        animation-delay: 0.19s;
+    }
+
+@keyframes navItemEnter {
+    from {
+        opacity: 0;
+        transform: translateX(-14px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateX(0);
+    }
+}
+
+/* Top navigation */
+
+.app-topbar {
+    transition: background-color 0.35s ease, border-color 0.35s ease, box-shadow 0.35s ease;
+}
+
+.app-topbar-auth a,
+.sidebar-toggle {
+    transition: background 0.25s ease, color 0.25s ease, transform 0.25s ease, box-shadow 0.25s ease;
+}
+
+    .app-topbar-auth a:hover {
+        transform: translateY(-2px);
+    }
+
+html[data-theme="dark"] .sidebar-toggle {
+    background: #273449;
+    color: #f1f5f9;
+    border-color: #475569;
+}
+
+html[data-theme="dark"] .topbar-auth-link {
+    color: #93c5fd;
+}
+
+    html[data-theme="dark"] .topbar-auth-link:hover {
+        background: #273449;
+    }
+
+html[data-theme="dark"] .topbar-auth-primary {
+    background: #2563eb;
+    color: #ffffff;
+}
+
+/* Mobile */
+
+@media (max-width: 550px) {
+    .app-topbar-right {
+        gap: 8px;
+    }
+
+    .theme-toggle {
+        width: 40px;
+        height: 40px;
+        font-size: 18px;
+    }
+
+    .app-topbar-user {
+        display: none;
+    }
+}
+
+/* Accessibility */
+
+@media (prefers-reduced-motion: reduce) {
+    *,
+    *::before,
+    *::after {
+        scroll-behavior: auto !important;
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+    }
+}
